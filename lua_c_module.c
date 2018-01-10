@@ -13,15 +13,19 @@ static int _internal_get_random_number(void)
 int get_random_number(lua_State *L)
 {
     int r = _internal_get_random_number();
+
     lua_pushnumber(L, r);
 
     return 1;
 }
 
-int add_four(lua_State *L)
+int add(lua_State *L)
 {
-    lua_Number n = luaL_checknumber(L, -1);
-    int r = 4 + n;
+    lua_Integer n1 = luaL_checkinteger(L, 1);
+    lua_Integer n2 = luaL_checkinteger(L, 2);
+
+    lua_Integer r = n1 + n2;
+
     lua_pushnumber(L, r);
 
     return 1;
@@ -33,7 +37,7 @@ int luaopen_lua_c_module(lua_State *L)
 
     luaL_Reg fs[] = {
         { "get_random_number", get_random_number },
-        { "add_four", add_four },
+        { "add", add },
         { NULL, NULL },
     };
 
