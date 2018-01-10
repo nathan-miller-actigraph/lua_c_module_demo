@@ -18,12 +18,22 @@ int get_random_number(lua_State *L)
     return 1;
 }
 
+int add_four(lua_State *L)
+{
+    lua_Number n = luaL_checknumber(L, -1);
+    int r = 4 + n;
+    lua_pushnumber(L, r);
+
+    return 1;
+}
+
 int luaopen_lua_c_module(lua_State *L)
 {
     const char *msg = "hello world";
 
     luaL_Reg fs[] = {
         { "get_random_number", get_random_number },
+        { "add_four", add_four },
         { NULL, NULL },
     };
 
